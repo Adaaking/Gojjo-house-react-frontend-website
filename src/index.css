@@ -6,3 +6,8 @@ body{
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
+@layer base{
+    ::-webkit-scrollbar{
+        @apply w-0
+    }
+}

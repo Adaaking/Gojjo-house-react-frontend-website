@@ -27,7 +27,7 @@ const Hero = () => {
       </div>
       <div className="w-[98%] text-white relative flex flex-col justify-start">
         <div className="flex flex-col justify-between">
-          <h1 className="ml-0 text-center text-3xl  sm:text-left  sm:ml-[15%] md:text-5xl mb-5">
+          <h1 className="ml-0 text-center text-3xl  sm:text-left  sm:ml-[15%] md:text-5xl mb-5 ">
             We will help you find
           </h1>
           <h1 className="ml-0 text-center text-3xl sm:text-left  sm:ml-[15%]  md:text-5xl mb-5">
