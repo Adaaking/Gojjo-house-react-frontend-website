@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import bgImage from "../images/home.gif";
 import { GoogleLogin } from '@react-oauth/google';
 import { useDispatch } from "react-redux";
-import { signIn } from "../redux/features/authSlice";
+import { login } from "../features/auth/authSlice";
 
 const initialUser = {email:'',password:''}
 const Login = () => {
@@ -15,12 +15,7 @@ const Login = () => {
   
   const handleSubmit = async (e) => {
     e.preventDefault()
-    try {
-      await dispatch(signIn(user))
-      navigate('/')
-    } catch (error) {
-      console.log(error)
-    }
+    dispatch(login(user))
   }
   const handleChange = (e) => {
     setUser({...user, [e.target.name]:e.target.value})

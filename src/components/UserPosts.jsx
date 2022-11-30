@@ -6,7 +6,7 @@ import { GiBathtub } from "react-icons/gi";
 const UserPosts = () => {
   return (
     <div>
-      <div className="px-2 grid gap-6 max-w-[1200px]">
+      <div className="px-2 grid grid-cols-2 gap-6 max-w-[1200px]">
         {tempFeaturedData.map((forsell, indx) => (
           <div
             key={indx}
