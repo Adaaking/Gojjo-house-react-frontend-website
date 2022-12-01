@@ -6,15 +6,13 @@ import UserPosts from "./UserPosts";
 
 const Profile = () => {
   return (
-    <div className=" max-w-[1400px] m-auto ">
-      <div className="grid sm:grid-cols-3 gap-6">
-        {/* <div className="mt-[6rem]  m-auto">
-            <Conversation/>
-        </div> */}
-        <div className="mt-[6rem] col-span-2  overflow-hidden h-[100vh] overflow-y-scroll scroll-smooth  ">
+    <div className=" max-w-[1000px] m-auto ">
+      
+      <div className="flex flex-col-reverse sm:grid sm:grid-cols-2  gap-6">
+        <div className="mt-[6rem] overflow-hidden h-[100vh] overflow-y-scroll scroll-smooth  ">
           <UserPosts/>
         </div>
-        <div className="mt-[6rem] py-3  ">
+        <div className="mt-[6rem] py-3 grid-column-start">
           <CreatePost/>
         </div>
       </div>

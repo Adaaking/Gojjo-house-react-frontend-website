@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API_URL = 'http://localhost:5000/api/home/'
+const API_URL = 'http://localhost:8800/api/home/'
+
 
 const createHome = async (homeData,token) => {
     const config = {
@@ -17,6 +18,16 @@ const getHomes =  async () => {
     return response.data
 }
 
+const getUserPosts = async (userId,token) =>{
+    const config = {
+        headers:{
+            authorization: `Bearer ${token}`
+        }
+    }
+    const response = await axios.post(API_URL + 'userPosts',userId,config)
+    return response.data
+}
+
 const deleteHome = async (homeId,token) => {
     const config = {
         headers: {
@@ -27,8 +38,10 @@ const deleteHome = async (homeId,token) => {
     return response.data
 }
 
+
 export const homeService = {
     createHome,
     getHomes,
+    getUserPosts,
     deleteHome
 }

@@ -1,19 +1,20 @@
 import { useSelector } from "react-redux";
 import { BrowserRouter, Navigate, redirect, Redirect, Route, Routes } from "react-router-dom";
 import Buy from "./components/Buy";
-import Contact from "./components/Contact";
+import Contact from "./pages/Contact";
 import FeaturedForSell from "./components/FeaturedForSell";
 import Footer from "./components/Footer";
 import ForsellHero from "./components/ForSellHero";
 import Forsell from "./components/ForSellHero";
 import Hero from "./components/Hero";
 import HowItWorks from "./components/HowItWorks";
-import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import Platform from "./components/Platform";
-import Profile from "./components/Profile";
-import Signup from "./components/Signup";
 import Testimonials from "./components/Testimonials";
+import Login from "./pages/Login";
+import Profile from './components/Profile'
+import Signup from "./pages/Signup";
+import Rent from "./components/Rent";
 
 function App() {
   const user = useSelector(state=> state.auth.user)
@@ -41,6 +42,10 @@ function App() {
           <Route path="/buy" element={<>
             <ForsellHero/>,
             <Buy/>
+          </>}/>
+          <Route path="/rent" element={<>
+            <ForsellHero/>,
+            <Rent/>,
           </>}/>
           <Route path="/profile" element={user?<Profile/> : <Navigate to = '/login'/>}/>
           <Route path="/contact" element={<Contact/>}/>

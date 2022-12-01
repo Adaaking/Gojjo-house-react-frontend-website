@@ -5,12 +5,26 @@ import { Link } from "react-router-dom";
 import avatar from "../images/avatar1.png";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../features/auth/authSlice";
+import { useEffect } from "react";
+import decode from 'jwt-decode'
+
 const Navbar = () => {
   const user = useSelector((state) => state.auth.user);
   const [nav, setNav] = useState(false);
   const handleClick = () => setNav(!nav);
   const dispatch = useDispatch()
 
+
+  useEffect(() => {
+    const token = user?.token;
+    if(token){
+      const decodedToken = decode(token)
+      if(decodedToken.exp * 1000 < new Date().getTime()){
+        console.log(decodedToken.exp * 1000)
+        dispatch(logout())
+      }
+    }
+  })
   return (
     <div className="border-b shadow w-full fixed bg-white h-[5rem]  md:border-none md:shadow-none z-10">
       <div className="flex h-full justify-between max-w-[1000px] m-auto items-center">
@@ -18,19 +32,19 @@ const Navbar = () => {
         <div className="hidden md:flex px-2 justify-between">
           <ul className="flex justify-between items-center px-2 ">
             <li className=" ml-10 hover:text-green-500">
-              <a href="/">Home</a>
+              <Link to="/">Home</Link>
             </li>
             <li className=" ml-10 hover:text-green-500">
-              <a href="/buy">Buy</a>
+              <Link to="/buy">Buy</Link>
             </li>
             <li className=" ml-10 hover:text-green-500">
-              <a href="/sell">Sell</a>
+              <Link to="/rent">Rent</Link>
             </li>
             <li className=" ml-10 hover:text-green-500">
-              <a href="/features">Features</a>
+              <Link to="/features">Features</Link>
             </li>
             <li className=" ml-10 hover:text-green-500">
-              <a href="/contact">Contact</a>
+              <Link to="/contact">Contact</Link>
             </li>
           </ul>
           {!user ? (
@@ -69,19 +83,19 @@ const Navbar = () => {
         >
           <ul className="flex flex-col justify-between px-2">
             <li className=" mb-4 hover:text-green-500">
-              <a href="/">Home</a>
+              <Link to="/">Home</Link>
             </li>
             <li className=" mb-4 hover:text-green-500">
-              <a href="/buy">Buy</a>
+              <Link to="/buy">Buy</Link>
             </li>
             <li className=" mb-4 hover:text-green-500">
-              <a href="/sell">Sell</a>
+              <Link to="/rent">Rent</Link>
             </li>
             <li className=" mb-4 hover:text-green-500">
-              <a href="/features">Features</a>
+              <Link to="/features">Features</Link>
             </li>
             <li className=" mb-4 hover:text-green-500">
-              <a href="/contact">Contact</a>
+              <Link to="/contact">Contact</Link>
             </li>
           </ul>
           {!user ? (
@@ -94,8 +108,9 @@ const Navbar = () => {
               </button>
             </div>
           ) : (
-            <div>
-              <img src={avatar} alt="" />
+            <div className="ml-5 grid grid-cols-2">
+              <Link to='/profile'><img className="object-cover w-[2rem] h-[2rem] rounded-[60%]" src={avatar} alt="" /></Link>
+              <button className="ml-2" onClick={() => dispatch(logout())}>logout</button>
             </div>
           )}
         </div>

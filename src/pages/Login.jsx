@@ -1,18 +1,25 @@
 import React from "react";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import bgImage from "../images/home.gif";
 import { GoogleLogin } from '@react-oauth/google';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../features/auth/authSlice";
+import { useEffect } from "react";
 
 const initialUser = {email:'',password:''}
+
 const Login = () => {
 
+  const { message,isSuccess } = useSelector(state => state.auth)
   const [user, setUser] = useState(initialUser);
   const dispatch = useDispatch()
   const navigate =useNavigate()
   
+  if(isSuccess){
+    navigate('/profile')
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     dispatch(login(user))
@@ -20,7 +27,6 @@ const Login = () => {
   const handleChange = (e) => {
     setUser({...user, [e.target.name]:e.target.value})
   }
-
   const googleSuccess = async (res) =>{
       const result = res?.profileObj;
       const token = res?.tokenId;
@@ -60,6 +66,7 @@ const Login = () => {
             onChange={handleChange}
             required
           />
+          <p className="text-red-600">{message&& message}</p>
           <button
             type="submit"
             className="bg-blue-600 w-full py-2 text-white rounded-md my-5"

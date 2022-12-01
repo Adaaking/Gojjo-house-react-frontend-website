@@ -5,9 +5,9 @@ import {GiBathtub} from 'react-icons/gi'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getHomes } from '../features/homes/homeSlice';
-import { useState } from 'react';
-const Buy = () => {
-  const homes = useSelector(state => state.homeReducer.forSell)
+
+const Rent = () => {
+  const homes = useSelector(state => state.homeReducer.forRent)
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getHomes())
@@ -57,4 +57,4 @@ const Buy = () => {
   )
 }
 
-export default Buy
+export default Rent

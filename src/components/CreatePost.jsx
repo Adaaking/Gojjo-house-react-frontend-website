@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -16,6 +16,7 @@ const inintialData = {
 };
 const CreatePost = () => {
   const user = useSelector((state) => state.auth.user);
+  const {isSuccess,message} = useSelector(state=> state.homeReducer)
   const [homeData, setHomeData] = useState(inintialData);
 
   let images = []
@@ -26,8 +27,8 @@ const CreatePost = () => {
     setHomeData({ ...homeData, [e.target.name]: e.target.value });
   };
 
-  
   const handleImage = (e) => {
+    e.preventDefault()
     const files = e.target.files
     console.log(files)
     for(let i=0; i < files.length; i++){
@@ -52,7 +53,7 @@ const CreatePost = () => {
   };
 
   return (
-    <div className=" w-full border border-slate-300 rounded-md m-auto p-5 md:w-[50vh]">
+    <div className=" w-full border border-slate-300 rounded-md p-5 md:w-[50vh]">
       <h1 className="text-2xl text-center my-2">Create your post here</h1>
       <form className="px-2" onSubmit={handleSubmit}>
         <div className="grid grid-cols-2 gap-4">
@@ -137,6 +138,7 @@ const CreatePost = () => {
         >
           submit
         </button>
+        <p className="text-red-600">{message&& message}</p>
       </form>
     </div>
   );
