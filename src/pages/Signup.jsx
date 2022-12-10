@@ -13,7 +13,8 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    dispatch(register(formData))
+    await dispatch(register(formData))
+    navigate('/profile')
   }
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]:e.target.value})

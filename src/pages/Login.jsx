@@ -16,13 +16,10 @@ const Login = () => {
   const dispatch = useDispatch()
   const navigate =useNavigate()
   
-  if(isSuccess){
-    navigate('/profile')
-  }
-
   const handleSubmit = async (e) => {
     e.preventDefault()
-    dispatch(login(user))
+    await dispatch(login(user))
+    navigate('/profile')
   }
   const handleChange = (e) => {
     setUser({...user, [e.target.name]:e.target.value})

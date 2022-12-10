@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from '../images/gojjo-logo.png'
+import logo from '../images/logo.png'
 import {SlSocialFacebook} from 'react-icons/sl'
 import {AiOutlineInstagram} from 'react-icons/ai'
 import {CiTwitter} from 'react-icons/ci'
@@ -13,18 +13,17 @@ const Footer = () => {
                 <img className='w-[5rem] h-[5rem] object-fit rounded-[50%] mb-3' src={logo} alt=""/>
                 <p className=''>A great plateform to buy, sell and rent your properties without any agent or commisions.</p>
             </div>
-            <div className='grid sm:grid-cols-3 gap-4'>
-                <div>
+            <div className='grid sm:grid-cols-2 gap-4'>
+                {/* <div>
                     <h1 className="mb-2 text-xl">company</h1>
                     <ul>
-                        <li className='py-1'>About us</li>
-                        <li className='py-1'>Services</li>
-                        <li className='py-1'>Pricing</li>
-                        <li className='py-1'>Blog</li>
+                        <li className='py-1'>Home</li>
+                        <li className='py-1'>buy</li>
+                        <li className='py-1'>rent</li>
                         <li className='py-1'>Login</li>
                         <li className='py-1'>Signup</li>
                     </ul>
-                </div>
+                </div> */}
                 <div>
                     <h1 className="mb-2 text-xl">Usefull Links</h1>
                     <ul>

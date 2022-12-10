@@ -10,6 +10,7 @@ const createHome = async (homeData,token) => {
         }
     }
     const response = await axios.post(API_URL + 'create',homeData,config)
+    console.log('homedata',homeData)
     return response.data
 }
 
@@ -18,30 +19,28 @@ const getHomes =  async () => {
     return response.data
 }
 
-const getUserPosts = async (userId,token) =>{
-    const config = {
-        headers:{
-            authorization: `Bearer ${token}`
-        }
-    }
-    const response = await axios.post(API_URL + 'userPosts',userId,config)
+const updatePosts = async (id,homeData) => {
+    const response = await axios.patch(API_URL+`update/${id}`,{data: homeData})
+
     return response.data
 }
 
-const deleteHome = async (homeId,token) => {
-    const config = {
-        headers: {
-            Authorization: `Bearer ${token},`
-        }
-    }
-    const response = await axios.delete(`${API_URL}/${homeId}`,config)
+const findHomebyid = async(id) => {
+    const response = await axios.get(API_URL + 'findbyid' + `/${id}`)
     return response.data
 }
+
+const deleteHome = async (homeId) => {
+    const response = await axios.delete(API_URL + 'delete' + `/${homeId}`)
+    return response.data
+}
+
 
 
 export const homeService = {
     createHome,
     getHomes,
-    getUserPosts,
+    updatePosts,
+    findHomebyid,
     deleteHome
 }

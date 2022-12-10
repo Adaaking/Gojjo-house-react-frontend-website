@@ -1,17 +1,19 @@
 import React from 'react'
 import { IoBedOutline } from "react-icons/io5";
-import { tempFeaturedData } from "../data";
 import {GiBathtub} from 'react-icons/gi'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getHomes } from '../features/homes/homeSlice';
-import { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 const Buy = () => {
-  const homes = useSelector(state => state.homeReducer.forSell)
+  const homes = useSelector(state => state.homeReducer.homes.filter(home => home.type === 'forSell'))
   const dispatch = useDispatch()
+
   useEffect(() => {
     dispatch(getHomes())
   },[dispatch])
+
   return (
     <div className="mb-20">
     <div className="flex flex-col items-center justify-between mt-[5rem]">
@@ -23,17 +25,18 @@ const Buy = () => {
         </p>
       </div>
       <div className="px-2 grid md:grid-cols-3 gap-6 max-w-[1200px]">
-        {homes.map((forsell, indx) => (
-          <div key={indx} className="w-[100%] mb-2 border rounded-md border-gray-200">
+        {homes&&homes.map((forsell, indx) => (
+          <Link to={`/buy/${forsell._id}`} key={indx} >
+          <div className="w-[100%] mb-2 border rounded-md border-gray-200">
             <div>
               <img
                 className="h-[40vh] w-full object-cover rounded-md"
                 src={forsell.image[0]?.url}
                 alt=""
-              />
+                />
             </div>
             <div className="p-4">
-                <h1 className="text-2xl mb-3">{forsell.price} birr/month</h1>
+                <h1 className="text-2xl mb-3">{forsell.price} birr</h1>
                 <p className="mb-4">
                   {forsell.subcity},{forsell.street},{forsell.city}, Ethiopia
                 </p>
@@ -50,8 +53,15 @@ const Buy = () => {
               </div>              
             </div>
           </div>
+        </Link>
         ))}
       </div>
+      {
+      homes.length ===0 &&
+      <div>
+       <h1 className='text-3xl text-red-500'> sorry! homes to sell are found</h1>
+      </div>
+      }
     </div>
   </div>
   )

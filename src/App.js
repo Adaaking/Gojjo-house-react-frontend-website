@@ -15,6 +15,7 @@ import Login from "./pages/Login";
 import Profile from './components/Profile'
 import Signup from "./pages/Signup";
 import Rent from "./components/Rent";
+import HomeDetail from "./components/HomeDetail";
 
 function App() {
   const user = useSelector(state=> state.auth.user)
@@ -47,6 +48,8 @@ function App() {
             <ForsellHero/>,
             <Rent/>,
           </>}/>
+          <Route path={`/buy/:id`} element={<HomeDetail/>}/>
+          <Route path={`/rent/:id`} element={<HomeDetail/>}/>
           <Route path="/profile" element={user?<Profile/> : <Navigate to = '/login'/>}/>
           <Route path="/contact" element={<Contact/>}/>
         </Routes>
