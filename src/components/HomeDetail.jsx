@@ -32,7 +32,7 @@ const HomeDetail = () => {
               {home.image?.map((image, indx) => (
                 <img
                   key={indx}
-                  className="w-full h-[100%] object-cover rounded-md"
+                  className="w-full md:h-[100%] object-cover rounded-md"
                   src={image?.url}
                   alt="home"
                 />

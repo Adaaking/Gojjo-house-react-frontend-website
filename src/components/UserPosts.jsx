@@ -3,26 +3,26 @@ import { IoBedOutline } from "react-icons/io5";
 import { GiBathtub } from "react-icons/gi";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { deleteHome, getHomes,homeAcrions } from "../features/homes/homeSlice";
+import { deleteHome,getUserPosts,homeAcrions } from "../features/homes/homeSlice";
 import Loading from "./Loading";
 
 const UserPosts = () => {
   const user = useSelector(state => state.auth.user)
   const isLoading = useSelector(state=> state.homeReducer.isLoading)
-  const homes = useSelector(state => state.homeReducer.homes.filter(home => home.creator === user.user?._id))
+  const userPosts= useSelector(state => state.homeReducer.userPosts)
 
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getHomes())
-  },[dispatch])
+    dispatch(getUserPosts(user.user._id))
+  },[dispatch,user.user._id])
 
   
   return (
     <div>
       {isLoading && <Loading/>}
       <div className="px-2 grid gap-6">
-        {homes && homes.map((home, indx) => (
+        {userPosts && userPosts.map((home, indx) => (
           <div
             key={indx}
             className="w-[100%] mb-2 border rounded-md border-gray-200"
@@ -70,7 +70,7 @@ const UserPosts = () => {
         ))
         }
       </div>
-      {homes.length===0&&<div className="flex mt-[5rem] justify-center h-screen">
+      {userPosts.length===0&&<div className="flex mt-[5rem] justify-center h-screen">
         <h1 className="text-3xl">you don't have posts yet</h1>
       </div>}
     </div>

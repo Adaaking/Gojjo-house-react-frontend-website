@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 import {
   createHome,
+  getHomes,
+  getUserPosts,
+  homeAcrions,
   updateHome,
 } from "../features/homes/homeSlice";
 
@@ -11,7 +14,7 @@ const CreatePost = () => {
   const user = useSelector((state) => state.auth.user);
   const currentId = useSelector((state) => state.homeReducer.currentUpdateId);
   const post = useSelector((state) =>
-    state.homeReducer.homes.find((home) => home._id === currentId)
+    state.homeReducer.userPosts.find((home) => home._id === currentId)
   );
   const { error, message } = useSelector((state) => state.homeReducer);
   const [isLoading, setIsLoading] = useState(false);
@@ -34,8 +37,8 @@ const CreatePost = () => {
     }
   }, [currentId, post, dispatch]);
 
-  let images = [];
 
+  let images = [];
   const handleChange = (e) => {
     e.preventDefault();
     setHomeData({ ...homeData, [e.target.name]: e.target.value });
@@ -70,11 +73,13 @@ const CreatePost = () => {
     try {
       setIsLoading(true)
       if (currentId) {
-        await dispatch(updateHome(currentId, homeData));
+        await dispatch(updateHome({currentId, homeData}));
+        dispatch(homeAcrions.setUpdateid(null))
       } else {
         await dispatch(createHome({ ...homeData, creator: user.user._id, images }));
       }
       clear()
+      dispatch(getUserPosts(user.user._id))
       setIsLoading(false)
     } catch (error) {
       setIsLoading(false)
